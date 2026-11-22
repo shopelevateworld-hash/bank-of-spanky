@@ -1,119 +1,54 @@
 (() => {
-  const apiBase = (window.BOS_API_BASE || "").replace(/\/$/, "");
-  const catalog = document.getElementById("product-catalog");
-  const status = document.getElementById("catalog-status");
-  const heroImage = document.getElementById("campaign-shirt");
-  if (!apiBase) { status.textContent = "The Printful connection is not configured."; return; }
-
-  const readPayload = async (path) => {
-    const response = await fetch(apiBase + path, { headers: { Accept: "application/json" } });
-    const payload = await response.json();
-    if (!response.ok || payload.code >= 400 || payload.error) {
-      throw new Error(payload.error?.message || payload.error || "Printful request failed");
-    }
-    return payload;
-  };
-  const listFrom = (payload) => {
-    const result = payload?.result;
-    if (Array.isArray(result)) return result;
-    if (Array.isArray(result?.items)) return result.items;
-    if (Array.isArray(result?.products)) return result.products;
-    return [];
-  };
-  const syncVariantsFrom = (entry) => {
-    if (Array.isArray(entry?.sync_variants)) return entry.sync_variants;
-    if (Array.isArray(entry?.variants)) return entry.variants;
-    return [];
-  };
-  const priceForTemplate = (template, syncedProducts) => {
-    const ids = new Set((template.available_variant_ids || []).map(Number));
-    const prices = [];
-    (template.variants || []).forEach(v => {
-      const raw = v.retail_price ?? v.price;
-      if (raw != null && Number.isFinite(Number(raw))) prices.push(Number(raw));
-    });
-    syncedProducts.forEach(entry => {
-      syncVariantsFrom(entry).forEach(v => {
-        const catalogVariantId = Number(v.variant_id ?? v.product_variant_id);
-        const raw = v.retail_price ?? v.price;
-        if ((!ids.size || ids.has(catalogVariantId)) && raw != null && Number.isFinite(Number(raw))) prices.push(Number(raw));
-      });
-    });
-    if (!prices.length) return null;
-    return Math.min(...prices);
-  };
-  const money = value => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
-
-  Promise.all([readPayload("/api/printful/templates"), readPayload("/api/printful/products")])
-    .then(([templatePayload, productPayload]) => {
-      const templates = listFrom(templatePayload).sort((a,b) => (a.created_at || 0) - (b.created_at || 0));
-      const syncedProducts = listFrom(productPayload);
-      if (!templates.length) throw new Error("No product templates were returned by Printful.");
-      const featured = templates[templates.length - 1];
-      if (featured.mockup_file_url) heroImage.src = featured.mockup_file_url;
-      catalog.replaceChildren();
-
-      templates.forEach((item, index) => {
-        const price = priceForTemplate(item, syncedProducts);
-        const card = document.createElement("article");
-        card.className = "catalog-card";
-
-        const imageLink = document.createElement("a");
-        imageLink.className = "catalog-image";
-        imageLink.href = "./product.html?template=" + encodeURIComponent(item.id);
-        const image = document.createElement("img");
-        image.src = item.mockup_file_url || "";
-        image.alt = "Front product view of BANK OF SPANKY shirt " + String(index + 1).padStart(2,"0");
-        image.loading = "lazy";
-        const tag = document.createElement("span");
-        tag.className = "catalog-tag";
-        tag.textContent = "FRONT VIEW / BOS " + String(index + 1).padStart(2,"0");
-        imageLink.append(image, tag);
-
-        const details = document.createElement("div");
-        details.className = "catalog-details";
-        const titleRow = document.createElement("div");
-        titleRow.className = "catalog-title-row";
-        const name = document.createElement("div");
-        const title = document.createElement("h3");
-        title.textContent = "BANK OF SPANKY";
-        const subtitle = document.createElement("p");
-        subtitle.textContent = "SQUAD SHIRT / " + String(index + 1).padStart(2,"0");
-        name.append(title, subtitle);
-        titleRow.append(name);
-
-        const priceNode = document.createElement("p");
-        priceNode.className = "price";
-        if (price == null) {
-          priceNode.classList.add("price-missing");
-          priceNode.textContent = "PRICE UNAVAILABLE";
-        } else {
-          const label = document.createElement("small");
-          label.textContent = "FROM";
-          priceNode.append(label, document.createTextNode(money(price)));
-        }
-
-        const order = document.createElement("a");
-        order.className = "order-button";
-        order.href = imageLink.href;
-        order.innerHTML = "<span>ORDER NOW</span><span>↗</span>";
-
-        const meta = document.createElement("p");
-        meta.className = "catalog-meta";
-        const sizes = (item.sizes || []).join(" · ");
-        const colors = (item.colors || []).map(c => c.color_name).filter(Boolean).join(", ");
-        meta.textContent = [colors, sizes].filter(Boolean).join(" / ") || "View available options";
-
-        details.append(titleRow, priceNode, order, meta);
-        card.append(imageLink, details);
-        catalog.appendChild(card);
-      });
-
-      const priced = templates.filter(t => priceForTemplate(t, syncedProducts) != null).length;
-      status.textContent = templates.length + " shirts loaded from Printful · " + priced + " with live USD pricing";
-      if (!priced) status.textContent += " · Check that the shirts are synced store products with retail prices set in Printful.";
-    })
-    .catch(error => {
-      status.textContent = "The live collection could not load: " + error.message;
-    });
+ const api=(window.BOS_API_BASE||"").replace(/\/$/,"");
+ const grid=document.getElementById("product-catalog");
+ const status=document.getElementById("catalog-status");
+ const hero=document.getElementById("hero-shirts");
+ const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(n);
+ const items=p=>{const r=p&&p.result;return Array.isArray(r)?r:Array.isArray(r?.items)?r.items:Array.isArray(r?.products)?r.products:[]};
+ const get=async path=>{const res=await fetch(api+path,{headers:{Accept:"application/json"}});const body=await res.json();if(!res.ok||body.error)throw new Error(body.error?.message||body.error||"Printful request failed");return body;};
+ const variants=p=>Array.isArray(p?.sync_variants)?p.sync_variants:Array.isArray(p?.variants)?p.variants:[];
+ const findPrice=(template,products)=>{
+   const ids=new Set((template.available_variant_ids||[]).map(Number));
+   const values=[];
+   for(const product of products) for(const v of variants(product)){
+     const id=Number(v.variant_id??v.product_variant_id);
+     const price=Number(v.retail_price??v.price);
+     if((!ids.size||ids.has(id))&&Number.isFinite(price)&&price>0) values.push(price);
+   }
+   if(values.length)return Math.min(...values);
+   const own=(template.variants||[]).map(v=>Number(v.retail_price??v.price)).filter(v=>Number.isFinite(v)&&v>0);
+   return own.length?Math.min(...own):null;
+ };
+ const create=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;};
+ if(!api){status.textContent="Store connection is not configured.";return;}
+ Promise.all([get("/api/printful/templates"),get("/api/printful/products")]).then(([tp,pp])=>{
+   const templates=items(tp).sort((a,b)=>(a.created_at||0)-(b.created_at||0));
+   const products=items(pp);
+   if(!templates.length)throw new Error("No shirt templates found in Printful.");
+   grid.replaceChildren();hero.replaceChildren();
+   templates.slice(-3).reverse().forEach((t,i)=>{
+     if(!t.mockup_file_url)return;
+     const im=create("img");im.src=t.mockup_file_url;im.alt="Front view of BANK OF SPANKY shirt";im.loading="eager";hero.append(im);
+   });
+   templates.forEach((t,i)=>{
+     const price=findPrice(t,products);
+     const url="./product.html?template="+encodeURIComponent(t.id);
+     const card=create("article","product-card");
+     const visual=create("a","product-visual");visual.href=url;
+     const img=create("img");img.src=t.mockup_file_url||"";img.alt="Front view of BANK OF SPANKY shirt "+(i+1);img.loading="lazy";
+     const index=create("span","product-index","FRONT VIEW / 0"+(i+1));visual.append(img,index);
+     const info=create("div","product-info");
+     info.append(create("h3","", "BANK OF SPANKY"));
+     info.append(create("p","product-subtitle","SQUAD SHIRT · EDITION 0"+(i+1)));
+     const priceEl=create("p","product-price");
+     if(price===null){priceEl.classList.add("price-error");priceEl.textContent="PRICE NOT RETURNED BY PRINTFUL";}
+     else{priceEl.append(create("small","","RETAIL PRICE"),document.createTextNode(money(price)));}
+     const order=create("a","order-button");order.href=url;order.append(create("span","","ORDER NOW"),create("b","","↗"));
+     const sizes=Array.isArray(t.sizes)?t.sizes.join(" · "):"";
+     info.append(priceEl,order,create("p","product-meta",sizes||"Select your size on the product page"));
+     card.append(visual,info);grid.append(card);
+   });
+   const priced=templates.filter(t=>findPrice(t,products)!==null).length;
+   status.textContent=templates.length+" SHIRTS LOADED · "+priced+" WITH PRINTFUL USD PRICING";
+ }).catch(err=>{status.textContent="THE COLLECTION COULD NOT LOAD: "+err.message;});
 })();
