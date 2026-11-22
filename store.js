@@ -57,11 +57,11 @@
           link.href = "./product.html?template=" + encodeURIComponent(item.id);
           const image = document.createElement("img");
           image.src = item.mockup_file_url || "";
-          image.alt = "BANK OF SPANKY shirt " + (index + 1);
+          image.alt = "Front view of BANK OF SPANKY shirt " + (index + 1);
           image.loading = "lazy";
           const tag = document.createElement("span");
           tag.className = "catalog-tag";
-          tag.textContent = "BOS / " + String(index + 1).padStart(2,"0");
+          tag.textContent = "FRONT VIEW  /  BOS " + String(index + 1).padStart(2,"0");
           link.append(image,tag);
           const meta = document.createElement("div");
           meta.className = "catalog-card-meta";
