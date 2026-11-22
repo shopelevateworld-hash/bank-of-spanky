@@ -1,11 +1,12 @@
 (() => {
   const apiBase = (window.BOS_API_BASE || "").replace(/\/$/, "");
+  const requestedId = Number(new URLSearchParams(window.location.search).get("template")) || 110786051;
   const image = document.getElementById("product-image");
   const sizeWrap = document.getElementById("sizes");
   const addButton = document.getElementById("add-to-cart");
   const feedback = document.getElementById("cart-feedback");
   const countNode = document.getElementById("cart-count");
-  let product = { id: 110786051, title: "Unisex classic tee", sizes: ["S","M","L","XL","2XL","3XL","4XL","5XL"], colors: [{color_name:"Black"}], mockup_file_url: image.src };
+  let product = { id: requestedId, title: "Unisex classic tee", sizes: [], colors: [{color_name:"Black"}], mockup_file_url: image.src };
   let selectedSize = "";
 
   function readCart() {
@@ -21,7 +22,6 @@
       const button = document.createElement("button");
       button.type = "button";
       button.textContent = size;
-      button.dataset.size = size;
       button.addEventListener("click", () => {
         selectedSize = size;
         sizeWrap.querySelectorAll("button").forEach(node => node.classList.toggle("selected", node === button));
@@ -31,8 +31,6 @@
       sizeWrap.appendChild(button);
     });
   }
-
-  renderSizes(product.sizes);
   updateCount();
 
   if (apiBase) {
@@ -45,18 +43,23 @@
       .then(payload => {
         const templates = payload.result?.items || [];
         if (!templates.length) throw new Error("No Printful templates found");
-        product = templates.find(item => item.id === 110786051) || [...templates].sort((a,b) => (b.sizes?.length || 0) - (a.sizes?.length || 0))[0];
+        const index = templates.findIndex(item => Number(item.id) === requestedId);
+        product = index >= 0 ? templates[index] : templates[0];
         if (product.mockup_file_url) image.src = product.mockup_file_url;
         document.getElementById("product-style").textContent = (product.title || "Unisex classic tee").toUpperCase();
         document.getElementById("product-color").textContent = (product.colors || []).map(item => item.color_name).join(", ").toUpperCase() || "BLACK";
+        const heading = document.querySelector(".details h1");
+        if (heading) heading.innerHTML = "BANK OF SPANKY.<br><em>Shirt " + String(templates.indexOf(product) + 1).padStart(2,"0") + ".</em>";
         renderSizes(product.sizes || []);
         feedback.textContent = "Live Printful data connected · template #" + product.id + ". Choose a size.";
       })
       .catch(error => {
-        feedback.textContent = "Showing the saved product preview. Live size refresh unavailable: " + error.message;
+        renderSizes(["S","M","L","XL","2XL","3XL","4XL","5XL"]);
+        feedback.textContent = "Showing the product preview. Live size refresh unavailable: " + error.message;
       });
   } else {
-    feedback.textContent = "Choose a size to add this shirt to your bag.";
+    renderSizes(["S","M","L","XL","2XL","3XL","4XL","5XL"]);
+    feedback.textContent = "Choose a size to add to your bag.";
   }
 
   addButton.addEventListener("click", () => {
@@ -69,7 +72,7 @@
     const existing = cart.find(item => item.templateId === product.id && item.size === selectedSize);
     if (existing) existing.quantity = (existing.quantity || 1) + 1;
     else cart.push({
-      productName: "Not Your Money. Cash Game #01.",
+      productName: "BANK OF SPANKY / " + (product.title || "SHIRT"),
       templateId: product.id,
       size: selectedSize,
       color: (product.colors || []).map(item => item.color_name).join(", ") || "Black",
