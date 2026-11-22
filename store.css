@@ -27,3 +27,20 @@
 .catalog-availability{margin:10px 19px 18px;color:#9a9286;font-size:8px;letter-spacing:.08em;line-height:1.7}
 @media(max-width:900px){.catalog-section{padding:75px 7vw}.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-image{height:300px}}
 @media(max-width:620px){.catalog-section{padding:65px 6vw}.catalog-grid{grid-template-columns:1fr 1fr;gap:11px}.catalog-image{height:210px}.catalog-image img{padding:12px}.catalog-card-meta{padding:13px 11px 3px}.catalog-card-meta h3{font-size:15px}.catalog-card-meta p{font-size:7px}.catalog-arrow{width:29px;height:29px}.catalog-availability{margin:8px 11px 13px;font-size:7px}}
+
+/* Four-piece front-view catalogue */
+.catalog-section{background:linear-gradient(180deg,#fff 0%,#f8f6f1 100%);padding:100px 5vw 116px}
+.catalog-section .section-heading{max-width:1320px;margin:0 auto 30px}
+.catalog-section .catalog-status,.catalog-section .catalog-grid{max-width:1320px;margin-left:auto;margin-right:auto}
+.catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.catalog-card{border:1px solid #e6ddcd;box-shadow:0 9px 28px rgba(45,34,15,.055);overflow:hidden}
+.catalog-card:hover{transform:translateY(-7px);box-shadow:0 19px 42px rgba(45,34,15,.12);border-color:#c7a66b}
+.catalog-image{height:390px;background:radial-gradient(ellipse at 50% 43%,#fff 0%,#f7f5ef 72%);padding:8px}
+.catalog-image:before{inset:12px;border-color:#ddcfb2}
+.catalog-image img{padding:20px;object-fit:contain;mix-blend-mode:multiply}
+.catalog-tag{top:25px;left:25px;padding:8px 10px;background:#fff;color:#85632e;border:1px solid #e5d6b8;font-size:7px;letter-spacing:.13em}
+.catalog-card-meta{padding:20px 17px 5px}
+.catalog-card-meta h3{font-size:18px;line-height:1.15}
+.catalog-availability{margin:10px 17px 18px;min-height:25px}
+@media(max-width:1100px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-image{height:370px}}
+@media(max-width:620px){.catalog-section{padding:65px 5vw 75px}.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.catalog-image{height:245px;padding:3px}.catalog-image img{padding:12px}.catalog-tag{top:15px;left:15px;padding:6px 7px;font-size:6px}.catalog-card-meta{padding:13px 10px 3px}.catalog-card-meta h3{font-size:14px}.catalog-card-meta p{font-size:6px}.catalog-arrow{width:27px;height:27px}.catalog-availability{margin:8px 10px 12px;font-size:6px}}
