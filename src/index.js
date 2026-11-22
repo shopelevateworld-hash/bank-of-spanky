@@ -54,6 +54,8 @@ export default {
         apiPath = "/stores";
       } else if (url.pathname === "/api/printful/products") {
         apiPath = "/store/products";
+      } else if (url.pathname === "/api/printful/template") {
+        apiPath = "/product-templates/497623456";
       } else if (/^\/api\/printful\/products\/\d+$/.test(url.pathname)) {
         const productId = url.pathname.split("/").pop();
         apiPath = `/store/products/${productId}`;
