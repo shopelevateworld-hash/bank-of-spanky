@@ -18,3 +18,28 @@
 .nft-details b{font-size:7px;letter-spacing:.2em;color:var(--gold)}
 .nft-note{max-width:420px;margin-top:17px;color:#837968;font-size:9px;line-height:1.7}
 @media(max-width:650px){.nft-vault{grid-template-columns:1fr;gap:42px}.nft-art{min-height:310px}.nft-orbit{width:220px;height:220px}.nft-seal{width:165px;height:165px}.nft-seal span{font-size:54px}.nft-seal:before{transform:translateY(-73px)}.nft-seal:after{transform:translateY(73px)}.nft-copy h2{font-size:65px}}
+
+
+/* NFT collection hero */
+.nft-hero{min-height:700px;padding:64px 6vw 76px;display:grid;grid-template-columns:.78fr 1.22fr;gap:2vw;align-items:center;overflow:hidden;background:radial-gradient(ellipse at 76% 48%,rgba(209,157,53,.2),transparent 47%),radial-gradient(ellipse at 18% 55%,rgba(50,73,119,.12),transparent 42%),#080706}
+.nft-hero-copy{position:relative;z-index:3;max-width:490px}
+.nft-hero-copy h1{font:700 clamp(58px,6.7vw,96px)/.82 var(--serif);letter-spacing:-.055em;text-transform:uppercase;margin:26px 0}
+.nft-hero-copy h1 em{color:var(--bright);font-style:italic;text-transform:none}
+.nft-hero-copy .hero-sub{max-width:390px;font-size:14px;line-height:1.9}
+.nft-mint-button{margin-top:23px;padding:22px 31px;font-size:13px;letter-spacing:.17em;box-shadow:0 8px 35px rgba(203,153,54,.25);transition:transform .25s ease,box-shadow .25s ease,filter .25s ease;animation:mintPulse 2.8s ease-in-out infinite}
+.nft-mint-button:hover{transform:translateY(-5px) scale(1.035);box-shadow:0 14px 48px rgba(235,181,72,.42);filter:brightness(1.12)}
+.nft-hero-caption{margin-top:24px;color:#a98b53;font-size:8px;letter-spacing:.2em}
+.nft-hero-caption i{font-style:normal;padding:0 8px;color:var(--bright)}
+.nft-hero-art{position:relative;min-width:0;display:grid;place-items:center;isolation:isolate}
+.nft-hero-art:before{content:"";position:absolute;inset:12%;border-radius:50%;background:radial-gradient(circle,rgba(229,172,61,.22),rgba(229,172,61,.04) 48%,transparent 72%);filter:blur(12px);z-index:-1}
+.nft-hero-art img{width:112%;max-width:none;height:auto;display:block;position:relative;z-index:1;filter:drop-shadow(0 24px 34px rgba(0,0,0,.65));animation:nftHover 6s ease-in-out infinite;transition:filter .35s ease,transform .35s ease}
+.nft-hero-art:hover img{transform:translateY(-10px) scale(1.025);filter:drop-shadow(0 30px 42px rgba(226,169,61,.24))}
+.nft-float-label{position:absolute;z-index:2;padding:10px 14px;border:1px solid rgba(218,174,91,.55);background:rgba(10,8,5,.8);color:#f2d18a;font-size:8px;letter-spacing:.2em;box-shadow:0 8px 28px #0008;animation:labelFloat 4s ease-in-out infinite}
+.nft-label-one{top:12%;left:7%;transform:rotate(-7deg)}
+.nft-label-two{right:3%;bottom:15%;transform:rotate(6deg);animation-delay:1.2s}
+@keyframes nftHover{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+@keyframes labelFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+@keyframes mintPulse{0%,100%{box-shadow:0 8px 35px rgba(203,153,54,.2)}50%{box-shadow:0 8px 48px rgba(235,181,72,.42)}}
+@media(max-width:950px){.nft-hero{grid-template-columns:.85fr 1.15fr;gap:0}.nft-hero-art img{width:120%}.nft-hero-copy h1{font-size:clamp(54px,7vw,76px)}}
+@media(max-width:650px){.nft-hero{min-height:0;padding:62px 7vw 75px;display:flex;flex-direction:column;align-items:stretch;gap:22px}.nft-hero-copy{max-width:none}.nft-hero-copy h1{font-size:clamp(62px,15vw,88px);margin:25px 0}.nft-hero-copy .hero-sub{font-size:13px}.nft-mint-button{font-size:11px;padding:19px 24px}.nft-hero-art{margin:0 -5vw}.nft-hero-art img{width:112%}.nft-label-one{top:8%;left:8%}.nft-label-two{right:7%;bottom:12%}.nft-hero-caption{font-size:7px}.nft-hero .hero-index{left:7vw}}
+@media(prefers-reduced-motion:reduce){.nft-hero-art img,.nft-float-label,.nft-mint-button{animation:none;transition:none}}
