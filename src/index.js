@@ -24,7 +24,8 @@ async function printfulGet(path, env) {
   return fetch(`https://api.printful.com${path}`, {
     headers: {
       "Authorization": `Bearer ${env.PRINTFUL_API_KEY}`,
-      "Accept": "application/json"
+      "Accept": "application/json",
+      "X-PF-Store-Id": "19111295"
     }
   });
 }
