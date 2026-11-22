@@ -1,3 +1,2 @@
-// Paste your deployed Cloudflare Worker base URL here.
-// Example: https://bank-of-spanky.<your-subdomain>.workers.dev
-window.BOS_API_BASE = "";
+// Public base URL for the Bank of Spanky Cloudflare Worker API.
+window.BOS_API_BASE = "https://bank-of-spanky.shopelevateworld.workers.dev";
