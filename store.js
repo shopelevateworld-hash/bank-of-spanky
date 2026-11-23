@@ -39,14 +39,14 @@
     }));
 
     grid.replaceChildren();
-    hero.replaceChildren();
+    if (hero) hero.replaceChildren();
     catalog.slice(0, 3).forEach(product => {
       if (!product.image) return;
       const img = el("img");
       img.src = product.image;
       img.alt = product.name + " front view";
       img.loading = "eager";
-      hero.append(img);
+      if (hero) hero.append(img);
     });
 
     catalog.forEach((product, index) => {
