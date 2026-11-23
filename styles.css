@@ -112,6 +112,9 @@ a{color:inherit;text-decoration:none}
 .deads-token-ring:before{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.38);border-radius:50%}
 .deads-token-core{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 35% 25%,#58317c,#21102f 65%,#100819);box-shadow:inset 0 0 35px rgba(197,143,255,.2),inset 0 0 0 1px rgba(231,205,255,.25)}
 .deads-token-mark{color:#ead3ff;font:600 clamp(72px,10vw,112px)/.9 var(--serif);text-shadow:0 4px 20px rgba(203,151,255,.4)}
+.deads-token-image{display:block;width:84%;height:84%;max-width:230px;max-height:230px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 8px 18px rgba(0,0,0,.42))}
+.deads-token-ring{transition:transform .35s cubic-bezier(.2,.75,.25,1),box-shadow .35s ease}
+.deads-token-ring:hover{transform:translateY(-7px) rotate(2deg) scale(1.035);box-shadow:0 30px 75px rgba(0,0,0,.55),0 0 58px rgba(190,125,255,.42),inset 0 0 0 2px rgba(255,255,255,.24)}
 .deads-token-name{margin-top:12px;color:#f1dcff;font-size:13px;font-weight:700;letter-spacing:.35em}
 .deads-token-caption{margin-top:7px;color:#b997d6;font-size:6px;letter-spacing:.2em}
 .deads-token-side{position:absolute;bottom:2px;color:#a981c9;font-size:7px;letter-spacing:.2em;text-align:center}
