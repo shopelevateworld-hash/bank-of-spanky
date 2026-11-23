@@ -121,3 +121,17 @@ a{color:inherit;text-decoration:none}
 .deads-orbit{position:absolute;z-index:-1;width:430px;aspect-ratio:1;border:1px solid rgba(201,154,255,.13);border-radius:50%;pointer-events:none}
 .deads-orbit-one{top:-280px;right:-120px}.deads-orbit-two{bottom:-330px;left:-160px;width:520px}
 @media(max-width:760px){.deads-community{padding:76px 7vw 70px}.deads-inner{grid-template-columns:1fr;gap:22px}.deads-copy h2{font-size:clamp(46px,12vw,66px)}.deads-description{font-size:12px}.deads-token{min-height:260px;order:-1}.deads-token-ring{width:min(62%,235px)}.deads-token-mark{font-size:85px}.deads-token-side{bottom:0;font-size:6px}.deads-kicker{font-size:7px;letter-spacing:.16em}}
+
+
+/* DEADS coin: frameless, clickable, softly animated with a violet flare */
+.deads-token{min-height:360px}
+.deads-token:before{content:"";position:absolute;z-index:0;width:min(92%,390px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(206,151,255,.48) 0%,rgba(157,83,236,.29) 30%,rgba(112,48,177,.12) 55%,transparent 73%);filter:blur(22px);animation:deadsFlare 4.5s ease-in-out infinite}
+.deads-token-link{position:relative;z-index:1;display:grid;place-items:center;width:min(82%,330px);aspect-ratio:1;border:0;border-radius:0;background:transparent;box-shadow:none;outline-offset:9px;transition:transform .38s cubic-bezier(.2,.75,.25,1),filter .38s ease}
+.deads-token-image{display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;border-radius:0;filter:drop-shadow(0 12px 28px rgba(0,0,0,.48)) drop-shadow(0 0 22px rgba(190,125,255,.2));animation:deadsCoinFloat 4s ease-in-out infinite;transition:filter .38s ease}
+.deads-token-link:hover{transform:translateY(-7px) rotate(2deg) scale(1.035)}
+.deads-token-link:hover .deads-token-image{filter:drop-shadow(0 16px 32px rgba(0,0,0,.5)) drop-shadow(0 0 34px rgba(211,157,255,.62))}
+.deads-token-link:focus-visible{outline:2px solid #e4c8ff}
+@keyframes deadsCoinFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes deadsFlare{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.08)}}
+@media(max-width:760px){.deads-token{min-height:280px}.deads-token-link{width:min(72%,270px)}}
+@media(prefers-reduced-motion:reduce){.deads-token:before,.deads-token-image{animation:none}}
