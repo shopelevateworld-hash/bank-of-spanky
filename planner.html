@@ -64,7 +64,8 @@
 <script>
 (function(){
 'use strict';
-const KEY='bos_x_planner_v1';\nconst SETTINGS='bos_x_planner_settings_v1';\nlet cadence={slotOne:'12:30',slotTwo:'18:30',dailyTarget:2};
+const KEY='bos_x_planner_v1';
+const SETTINGS='bos_x_planner_settings_v1';\nlet cadence={slotOne:'12:30',slotTwo:'18:30',dailyTarget:2};
 const CATS=['The Bank','Money System','Blockchain Pillars','NFT Vault','Spanky Army','DEADS Community','Merch Vault','Spanky Humor'];
 const $=id=>document.getElementById(id);
 const zone=Intl.DateTimeFormat().resolvedOptions().timeZone||'Local time';
@@ -123,11 +124,12 @@ function generateWeek(){let start=weekStart(),used=new Set(posts.map(p=>p.copy))
 ['Money System','Capital can compound. So can knowledge, creativity and community effort. A better economic design should recognize all three.','4:5 portrait','Conceptual editorial image of gold coins beside books, tools and digital ledger, balanced black and gold lighting.'],
 ['NFT Vault','Your NFT is a collectible first. Explore the collection, understand the access details, and decide if the Bank is your kind of institution. 🔐','1:1 square','Luxury NFT collectible displayed in a dark glass vault, black marble, gold highlights.'],
 ['DEADS Community','Culture is built by participation. Shout out someone in the community who keeps showing up and making things happen. 💀','No image','']
-];let added=0;ideas.slice(0,cadence.dailyTarget*7).forEach((s,i)=>{let d=new Date(start);d.setDate(d.getDate()+Math.floor(i/cadence.dailyTarget));let copy=s[1];if(used.has(copy))return;posts.push({id:id(),category:s[0],style:'Generated weekly idea',copy,brief:s[3],format:s[2],status:'draft',date:isoDate(d),time:i%2===0?cadence.slotOne:cadence.slotTwo,createdAt:new Date().toISOString(),actualAt:''});used.add(copy);added++});save();alert(added+' new draft ideas added. Existing approved and published posts were preserved.')}
+];let added=0;ideas.forEach((s,i)=>{let d=new Date(start);d.setDate(d.getDate()+i);let copy=s[1];if(used.has(copy))return;posts.push({id:id(),category:s[0],style:'Generated weekly idea',copy,brief:s[3],format:s[2],status:'draft',date:isoDate(d),time:i%2===0?cadence.slotOne:cadence.slotTwo,createdAt:new Date().toISOString(),actualAt:''});used.add(copy);added++});save();alert(added+' new draft ideas added. Existing approved and published posts were preserved.')}
 function exportData(){let blob=new Blob([JSON.stringify({brand:'BANK OF SPANKY',version:1,exportedAt:new Date().toISOString(),posts},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='bank-of-spanky-x-planner-backup-'+isoDate(new Date())+'.json';a.click();URL.revokeObjectURL(a.href)}
 function importData(file){let r=new FileReader();r.onload=()=>{try{let data=JSON.parse(r.result),arr=Array.isArray(data)?data:data.posts;if(!Array.isArray(arr))throw Error('Invalid backup');if(!confirm('Import '+arr.length+' posts? Existing posts with matching IDs will be updated.'))return;let map=new Map(posts.map(p=>[p.id,p]));arr.forEach(p=>{if(p.id&&p.copy)map.set(p.id,p)});posts=Array.from(map.values());save();alert('Backup imported.')}catch(e){alert('Could not read that planner backup.')}};r.readAsText(file)}
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>switchView(t.dataset.view)));
-$('strategyJump').onclick=$('strategyJumpTop').onclick=()=>switchView('strategyView');\n$('saveCadence').onclick=()=>{let n=Number($('dailyTarget').value);if(!Number.isInteger(n)||n<1||n>5){alert('Daily target must be between 1 and 5.');return}cadence={slotOne:$('slotOne').value||'12:30',slotTwo:$('slotTwo').value||'18:30',dailyTarget:n};localStorage.setItem(SETTINGS,JSON.stringify(cadence));render();alert('Publishing cadence saved for this browser.');};$('newTweet').onclick=$('calendarAdd').onclick=$('libraryAdd').onclick=()=>openModal(null);
+$('strategyJump').onclick=$('strategyJumpTop').onclick=()=>switchView('strategyView');
+$('saveCadence').onclick=()=>{let n=Number($('dailyTarget').value);if(!Number.isInteger(n)||n<1||n>5){alert('Daily target must be between 1 and 5.');return}cadence={slotOne:$('slotOne').value||'12:30',slotTwo:$('slotTwo').value||'18:30',dailyTarget:n};localStorage.setItem(SETTINGS,JSON.stringify(cadence));render();alert('Publishing cadence saved for this browser.');};$('newTweet').onclick=$('calendarAdd').onclick=$('libraryAdd').onclick=()=>openModal(null);
 $('closeModal').onclick=$('cancelModal').onclick=closeModal;$('tweetForm').addEventListener('submit',saveForm);$('copy').addEventListener('input',updateCounter);
 $('status').addEventListener('change',()=>$('actualWrap').classList.toggle('hidden',$('status').value!=='published'));
 $('deleteTweet').onclick=()=>{let idv=$('tweetId').value;if(idv&&confirm('Delete this tweet permanently from this browser?')){posts=posts.filter(p=>p.id!==idv);closeModal();save()}};
