@@ -200,7 +200,7 @@ ideas.forEach((s,i)=>{
 let dayIndex=i<14?Math.floor(i/2):i<27?Math.floor((i-14)/2):Math.min(6,Math.floor((i-27)/2));
 let slotIndex=i<14?(i%2):i<27?(3+2*((i-14)%2)):(i-27<14?2+2*((i-27)%2):5);
 let d=new Date(start);d.setDate(d.getDate()+dayIndex);
-let copy=s[2];if(used.has(copy))return;
+let copy=s[2],dayKey=isoDate(d);if(used.has(copy)||posts.filter(p=>p.date===dayKey).length>=6)return;
 let times=[cadence.slotOne,cadence.slotTwo,cadence.slotThree,cadence.slotFour,cadence.slotFive,cadence.slotSix];
 posts.push({id:id(),category:s[0],style:s[1],slotLabel:['Community','Meme / Humor','Brand update','Education','Engagement','Recruitment / Promotion'][slotIndex],brief:s[4],format:s[3],copy,status:'draft',date:isoDate(d),time:times[slotIndex],createdAt:new Date().toISOString(),actualAt:'',generated:true});
 used.add(copy);added++;
