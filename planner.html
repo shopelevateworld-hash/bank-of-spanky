@@ -99,7 +99,7 @@ const seeds=[
 ['NFT Vault','A key is only useful when there’s a door worth opening. Find the BANK OF SPANKY collection and explore the vault. 🔑🏦','1:1 square','A polished gold key resting before a monumental black vault door, warm gold light leaking through, luxury bank campaign, cinematic, no text.']
 ];
 let posts=[];
-function load(){try{cadence={...cadence,...JSON.parse(localStorage.getItem(SETTINGS)||'{}')};}catch(e){}try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(Array.isArray(v))posts=v;else seed()}catch(e){seed()}}
+function load(){try{cadence={...cadence,...JSON.parse(localStorage.getItem(SETTINGS)||'{}')};}catch(e){}cadence={...cadence,slotOne:cadence.slotOne||'09:00',slotTwo:cadence.slotTwo||'12:30',slotThree:cadence.slotThree||'16:00',slotFour:cadence.slotFour||'19:30',dailyTarget:4};try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(Array.isArray(v))posts=v;else seed()}catch(e){seed()}}
 function save(){localStorage.setItem(KEY,JSON.stringify(posts));render()}
 function seed(){let monday=startWeek(new Date());posts=seeds.map((s,i)=>{let day=Math.floor(i/2);let d=new Date(monday);d.setDate(d.getDate()+day);return {id:id(),category:s[0],style:'Brand voice',copy:s[1].replace(/\\n/g,'\n'),brief:s[3],format:s[2],status:'approval',date:isoDate(d),time:i%2===0?cadence.slotOne:cadence.slotTwo,createdAt:new Date().toISOString(),actualAt:''}});localStorage.setItem(KEY,JSON.stringify(posts))}
 function statusName(s){return ({draft:'Draft',approval:'Needs approval',ready:'Approved / ready',published:'Published manually'})[s]||s}
