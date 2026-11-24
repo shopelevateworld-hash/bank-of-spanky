@@ -69,7 +69,8 @@
 (function(){
 'use strict';
 const KEY='bos_x_planner_v1';
-const SETTINGS='bos_x_planner_settings_v1';\nlet cadence={version:2,slotOne:'09:00',slotTwo:'11:30',slotThree:'13:30',slotFour:'16:00',slotFive:'19:00',slotSix:'21:00',dailyTarget:6,timeZone:'Europe/Lisbon'};
+const SETTINGS='bos_x_planner_settings_v1';
+let cadence={version:2,slotOne:'09:00',slotTwo:'11:30',slotThree:'13:30',slotFour:'16:00',slotFive:'19:00',slotSix:'21:00',dailyTarget:6,timeZone:'Europe/Lisbon'};
 const CATS=['The Bank','Money System','Blockchain Pillars','NFT Vault','Spanky Army','DEADS Community','Merch Vault','Spanky Humor'];
 const $=id=>document.getElementById(id);
 const zone=Intl.DateTimeFormat().resolvedOptions().timeZone||'Local time';
