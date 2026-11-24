@@ -19,7 +19,7 @@
 <div class="shell">
 <header class="top"><a class="brand" href="./index.html"><img src="./assets/images/logo.png" alt=""><span><small>BANK OF</small><b>SPANKY</b></span></a><div class="top-actions"><span class="pillnote" id="timezoneLabel"></span><button class="btn small" id="exportBtn">Export backup</button><button class="btn small" id="importBtn">Import</button><input type="file" id="importFile" accept="application/json" class="hidden"></div></header>
 <section class="hero"><div><div class="eyebrow">SOCIAL OPERATIONS / LOCAL WORKSPACE</div><h1>X CONTENT <em>COMMAND CENTER</em></h1><p>Plan the conversation. Build the army. Keep the Bank moving.</p></div><div class="hero-actions"><button class="btn ghost" id="strategyJump">Brand strategy ↓</button><button class="btn gold" id="newTweet">＋ Create tweet</button></div></section>
-<div class="notice"><b>Workspace storage:</b> posts are saved in this browser using local storage. Export backups regularly. This page is not protected by an account login and does not sync between devices. No tweet is automatically published.</div>
+<div class="notice"><b>Planner save location:</b> your tweets and image prompts are saved automatically in this browser on this device. This is normal — it is not an error. The planner does not yet sync between devices or use a shared account login, so use Export backup to keep a copy. Tweets stay as drafts until you review and publish them yourself.</div>
 <section class="panel" style="margin-bottom:16px"><div class="panel-head"><div><div class="eyebrow">THE BANK OF SPANKY X STRATEGY</div><h2 style="font:600 25px var(--serif);margin:5px 0">Bank swagger × monetary ideas × crypto culture × community.</h2><p>Lead with a strong point of view. Rotate the eight content pillars. Build trust through accurate claims, then invite people into the Bank.</p></div><button class="btn small" id="strategyJumpTop">Read full strategy ↗</button></div><div class="strategy-grid"><div class="pillar"><b>THE BANK</b><p>Brand identity, announcements and empire-building.</p></div><div class="pillar"><b>THE SYSTEM</b><p>Economic inequality, access and monetary critique.</p></div><div class="pillar"><b>THE VAULT</b><p>NFTs, access and collectible culture.</p></div><div class="pillar"><b>THE ARMY</b><p>Discord, DEADS, community and participation.</p></div></div></section>
 <section class="stats"><div class="stat"><span>Total tweets</span><strong id="statTotal">0</strong></div><div class="stat"><span>Needs approval</span><strong id="statApproval">0</strong></div><div class="stat"><span>Approved / ready</span><strong id="statReady">0</strong></div><div class="stat"><span>Published manually</span><strong id="statPublished">0</strong></div></section>
 <nav class="tabs"><button class="tab active" data-view="calendarView">Weekly calendar</button><button class="tab" data-view="dailyView">Daily planner</button><button class="tab" data-view="libraryView">Tweet library</button><button class="tab" data-view="strategyView">Brand strategy</button><button class="tab" data-view="reportsView">Reports</button></nav>
@@ -143,7 +143,7 @@ html+='</section>';
 });
 $('dailyPlan').innerHTML=html;
 }
-function generateWeek(){
+function generateWeek(silent=false){
 let start=weekStart(),used=new Set(posts.map(p=>p.copy));
 let ideas=[
 ['The Bank','Bold brand statement','THE BANK IS OPEN. Not to protect the old rules — to ask who gets a seat at the table when the next system is built. 🏦','1:1 square','A monumental black marble bank entrance with heavy brass doors opening onto a warm golden interior, dramatic low-angle luxury editorial photography, subtle BANK OF SPANKY insignia, deep blacks and antique gold, no extra text.'],
@@ -186,8 +186,7 @@ posts.push({id:id(),category:s[0],style:s[1],copy,brief:s[4],format:s[3],status:
 used.add(copy);added++;
 });
 save();
-switchView('dailyView');
-alert(added+' strategic draft tweets added. Target: four posts per day across seven days. Every tweet includes a tailored image-generation prompt. Existing approved and published posts were preserved.');
+if(!silent){switchView('dailyView');alert(added+' strategic draft tweets added. Target: four posts per day across seven days. Every tweet includes a tailored image-generation prompt. Existing approved and published posts were preserved.');}
 }
 
 function exportData(){let blob=new Blob([JSON.stringify({brand:'BANK OF SPANKY',version:1,exportedAt:new Date().toISOString(),posts},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='bank-of-spanky-x-planner-backup-'+isoDate(new Date())+'.json';a.click();URL.revokeObjectURL(a.href)}
@@ -211,7 +210,7 @@ $('dailyNext').onclick=()=>{let d=weekStart();d.setDate(d.getDate()+7);$('weekDa
 $('dailyToday').onclick=()=>{$('weekDate').value=isoDate(new Date());render()};
 $('dailyWeekDate').onchange=()=>{$('weekDate').value=$('dailyWeekDate').value;render()};$('exportBtn').onclick=exportData;$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=e=>{if(e.target.files[0])importData(e.target.files[0]);e.target.value=''};
 document.addEventListener('click',handleClick);
-load();fillCats();render();
+load();generateWeek(true);fillCats();render();
 })();
 </script>
 </body></html>
