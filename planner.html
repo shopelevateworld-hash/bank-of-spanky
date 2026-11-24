@@ -101,7 +101,7 @@ let posts=[];
 let weeklyIdeas=[];
 function load(){let saved={};try{saved=JSON.parse(localStorage.getItem(SETTINGS)||'{}')||{};}catch(e){}if(saved.version===2){cadence={...cadence,...saved};}else{cadence={...cadence,version:2,timeZone:'Europe/Lisbon',slotOne:'09:00',slotTwo:'11:30',slotThree:'13:30',slotFour:'16:00',slotFive:'19:00',slotSix:'21:00',dailyTarget:6};}cadence={...cadence,slotOne:cadence.slotOne||'09:00',slotTwo:cadence.slotTwo||'11:30',slotThree:cadence.slotThree||'13:30',slotFour:cadence.slotFour||'16:00',slotFive:cadence.slotFive||'19:00',slotSix:cadence.slotSix||'21:00',dailyTarget:6,timeZone:cadence.timeZone||'Europe/Lisbon'};try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(Array.isArray(v))posts=v;else seed()}catch(e){seed()}}
 function save(){localStorage.setItem(KEY,JSON.stringify(posts));render()}
-function seed(){let monday=startWeek(new Date());posts=seeds.map((s,i)=>{let day=Math.floor(i/2);let d=new Date(monday);d.setDate(d.getDate()+day);return {id:id(),category:s[0],style:'Brand voice',copy:s[1].replace(/\\n/g,'\n'),brief:s[3],format:s[2],status:'approval',date:isoDate(d),time:i%2===0?cadence.slotOne:cadence.slotTwo,createdAt:new Date().toISOString(),actualAt:''}});localStorage.setItem(KEY,JSON.stringify(posts))}
+function seed(){posts=[];localStorage.setItem(KEY,JSON.stringify(posts))}
 function statusName(s){return ({draft:'Draft',approval:'Needs approval',ready:'Approved / ready',published:'Published manually'})[s]||s}
 function catColor(c){return ({'The Bank':'#e6bd6c','Money System':'#8fb4d8','Blockchain Pillars':'#a8c7a0','NFT Vault':'#c5a1e8','Spanky Army':'#e49b87','DEADS Community':'#a7a0bd','Merch Vault':'#e5d5a0','Spanky Humor':'#e2a0c1'})[c]||'#c49a52'}
 function fmtDate(s){if(!s)return '';return dateFrom(s).toLocaleDateString(undefined,{month:'short',day:'numeric'})}
@@ -189,12 +189,13 @@ let ideas=[
 ['Spanky Army','Engagement / reply prompt','Drop one thing you learned this month that changed how you think about money, technology or community. Let’s compare notes. 💬','1:1 square','Open black notebook with handwritten marks intentionally blurred, gold pen and a small group of warm lights in the background, cinematic black-and-gold editorial still life, no legible writing.'],
 ['Merch Vault','Recruitment / merch promotion','THE MERCH VAULT is open. Explore the BANK OF SPANKY collection, check the fit and product details, and choose your uniform. NOT YOUR MONEY.','4:5 portrait','Front-facing premium black streetwear tee on a dark stone plinth, gold graphic area visible, luxury fashion studio lighting, realistic fabric texture, no invented lettering.'],
 ['DEADS Community','Community / culture','DEADS culture is made by the people behind it. Show us the art, the ideas and the builders keeping the community creative. 💀','1:1 square','Obsidian sculptural skull medallion with restrained gold inlay on black stone, moody underground gallery lighting, tasteful collectible art campaign, no token symbols or text.'],
-['Money System','Education / critical thinking','Follow the incentives. Ask who benefits. Check the evidence. A serious conversation about money deserves more than a headline and a hot take.','16:9 landscape','Brass magnifying glass over an open financial ledger on black marble, subtle gold reflections, investigative editorial photography, crisp focus, no readable text.']\n];
+['Money System','Education / critical thinking','Follow the incentives. Ask who benefits. Check the evidence. A serious conversation about money deserves more than a headline and a hot take.','16:9 landscape','Brass magnifying glass over an open financial ledger on black marble, subtle gold reflections, investigative editorial photography, crisp focus, no readable text.']\n['Merch Vault','Recruitment / promotion','The look is black and gold. The message is NOT YOUR MONEY. Explore the BANK OF SPANKY apparel collection and check the details of the latest drop. 🏦','4:5 portrait','High-end fashion editorial photograph of a black BANK OF SPANKY streetwear shirt laid flat on black marble, front graphic clearly visible, precise gold highlights, luxurious studio lighting, no invented lettering.'],
+];
 weeklyIdeas=ideas;
 let added=0;
 ideas.forEach((s,i)=>{
-let dayIndex=i<14?Math.floor(i/2):i<28?Math.floor((i-14)/2):Math.floor((i-28)/2);
-let slotIndex=i<14?(i%2):i<28?(3+(i-14)%2):(2+(i-28)%2);
+let dayIndex=i<14?Math.floor(i/2):i<27?Math.floor((i-14)/2):Math.min(6,Math.floor((i-27)/2));
+let slotIndex=i<14?(i%2):i<27?(3+2*((i-14)%2)):(i-27<14?2+2*((i-27)%2):5);
 let d=new Date(start);d.setDate(d.getDate()+dayIndex);
 let copy=s[2];if(used.has(copy))return;
 let times=[cadence.slotOne,cadence.slotTwo,cadence.slotThree,cadence.slotFour,cadence.slotFive,cadence.slotSix];
