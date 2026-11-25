@@ -4,152 +4,115 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080706">
-  <meta name="description" content="Discover the NOT YOUR MONEY NFT collection from BANK OF SPANKY.">
+  <meta name="description" content="Discover the NOT YOUR MONEY NFT collection and holder utility from BANK OF SPANKY.">
   <title>NOT YOUR MONEY NFTs — BANK OF SPANKY</title>
   <link rel="icon" type="image/png" href="./assets/images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=9">
-  <link rel="stylesheet" href="./nfts.css?v=2">
+  <link rel="stylesheet" href="./nfts.css?v=3">
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
-  <header class="header">
-    <a class="brand" href="./index.html#top" aria-label="Bank of Spanky home">
-      <img src="./assets/images/logo.png" alt="">
-      <span><small>BANK OF</small><b>SPANKY</b></span>
-    </a>
+  <header class="nft-header">
+    <a class="nft-brand" href="./index.html#top"><img src="./assets/images/logo.png" alt=""><span><small>BANK OF</small><b>SPANKY</b></span></a>
     <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
     <nav class="nav" aria-label="Main navigation">
-      <a class="nav-nfts active" href="./nfts.html" aria-current="page">NFTs</a>
+      <a class="active" href="./nfts.html" aria-current="page">NFTs</a>
       <a href="./index.html#inside">Inside the bank</a>
       <a href="./index.html#departments">Departments</a>
       <a href="./whitepaper.html">Whitepaper</a>
       <a href="./index.html#deads">DEADS community</a>
-      <a class="nav-store" href="./store.html">Shop merch ↗</a>
+      <a href="./store.html">Shop merch ↗</a>
       <a class="nav-mint" href="https://gravemint.io/mint/2nw995" target="_blank" rel="noopener noreferrer">Mint on Gravemint ↗</a>
     </nav>
   </header>
 
-  <main class="nft-page">
+  <main>
     <section class="nft-hero">
-      <p class="nft-eyebrow"><span></span> BANK OF SPANKY <b> / </b> DIGITAL COLLECTIBLES <span></span></p>
-      <p class="nft-edition">THE NOT YOUR MONEY COLLECTION · VOL. 001</p>
+      <p class="eyebrow"><span></span> BANK OF SPANKY <i>/</i> DIGITAL COLLECTIBLES <span></span></p>
+      <p class="edition">THE NOT YOUR MONEY COLLECTION · VOL. 001</p>
       <h1>NOT YOUR<br><em>MONEY.</em></h1>
-      <p class="nft-subtitle">Six faces. One institution. Absolutely no permission.</p>
-      <div class="nft-hero-rule"><span>EST. ON THE BLOCKCHAIN</span><span>6 UNIQUE COLLECTIBLES</span><span>THE BANK IS OPEN</span></div>
+      <p class="hero-subtitle">Six faces. One institution. Absolutely no permission.</p>
+      <div class="hero-meta"><span>EST. ON THE BLOCKCHAIN</span><span>6 UNIQUE COLLECTIBLES</span><span>THE BANK IS OPEN</span></div>
     </section>
 
-    <section class="nft-gallery" id="nft-collection">
-      <header class="nft-gallery-heading">
-        <p class="nft-section-label">THE VAULT / 001</p>
+    <section class="collection section-wrap" id="nft-collection">
+      <div class="section-heading">
+        <p class="section-label">THE VAULT / 001</p>
         <h2>Choose your <em>mystery.</em></h2>
-        <p>Six cards are waiting in the vault. Hover over one to turn it over and reveal a random face.</p>
-      </header>
-      <div class="mystery-grid" aria-label="Six mystery NFT cards">
-        <button class="mystery-card" type="button" aria-label="Mystery NFT card 1. Hover to reveal." aria-pressed="false">
+        <p>Six cards are waiting in the vault. Hover or tap a card to reveal a collectible.</p>
+      </div>
+      <div class="mystery-grid">
+        <button class="mystery-card" type="button" aria-label="Mystery NFT card 1. Hover or tap to reveal." aria-pressed="false">
           <span class="mystery-card__flip">
             <span class="mystery-card__side mystery-card__back"><img src="./assets/images/NFTs/NYM-face-down-SMALL.png" alt="" draggable="false"></span>
             <span class="mystery-card__side mystery-card__front"><img class="mystery-card__art" src="./assets/images/NFTs/NFT-01.png" alt="NOT YOUR MONEY NFT collectible" draggable="false"></span>
           </span>
-          <span class="mystery-card__caption">MYSTERY CARD <i>01</i></span>
-        </button>
-        <button class="mystery-card" type="button" aria-label="Mystery NFT card 2. Hover to reveal." aria-pressed="false">
+          <span class="card-caption">MYSTERY CARD <i>01</i></span>
+        </button>\n<button class="mystery-card" type="button" aria-label="Mystery NFT card 2. Hover or tap to reveal." aria-pressed="false">
           <span class="mystery-card__flip">
             <span class="mystery-card__side mystery-card__back"><img src="./assets/images/NFTs/NYM-face-down-SMALL.png" alt="" draggable="false"></span>
             <span class="mystery-card__side mystery-card__front"><img class="mystery-card__art" src="./assets/images/NFTs/NFT-02.png" alt="NOT YOUR MONEY NFT collectible" draggable="false"></span>
           </span>
-          <span class="mystery-card__caption">MYSTERY CARD <i>02</i></span>
-        </button>
-        <button class="mystery-card" type="button" aria-label="Mystery NFT card 3. Hover to reveal." aria-pressed="false">
+          <span class="card-caption">MYSTERY CARD <i>02</i></span>
+        </button>\n<button class="mystery-card" type="button" aria-label="Mystery NFT card 3. Hover or tap to reveal." aria-pressed="false">
           <span class="mystery-card__flip">
             <span class="mystery-card__side mystery-card__back"><img src="./assets/images/NFTs/NYM-face-down-SMALL.png" alt="" draggable="false"></span>
             <span class="mystery-card__side mystery-card__front"><img class="mystery-card__art" src="./assets/images/NFTs/NFT-03.png" alt="NOT YOUR MONEY NFT collectible" draggable="false"></span>
           </span>
-          <span class="mystery-card__caption">MYSTERY CARD <i>03</i></span>
-        </button>
-        <button class="mystery-card" type="button" aria-label="Mystery NFT card 4. Hover to reveal." aria-pressed="false">
+          <span class="card-caption">MYSTERY CARD <i>03</i></span>
+        </button>\n<button class="mystery-card" type="button" aria-label="Mystery NFT card 4. Hover or tap to reveal." aria-pressed="false">
           <span class="mystery-card__flip">
             <span class="mystery-card__side mystery-card__back"><img src="./assets/images/NFTs/NYM-face-down-SMALL.png" alt="" draggable="false"></span>
             <span class="mystery-card__side mystery-card__front"><img class="mystery-card__art" src="./assets/images/NFTs/NFT-04.png" alt="NOT YOUR MONEY NFT collectible" draggable="false"></span>
           </span>
-          <span class="mystery-card__caption">MYSTERY CARD <i>04</i></span>
-        </button>
-        <button class="mystery-card" type="button" aria-label="Mystery NFT card 5. Hover to reveal." aria-pressed="false">
+          <span class="card-caption">MYSTERY CARD <i>04</i></span>
+        </button>\n<button class="mystery-card" type="button" aria-label="Mystery NFT card 5. Hover or tap to reveal." aria-pressed="false">
           <span class="mystery-card__flip">
             <span class="mystery-card__side mystery-card__back"><img src="./assets/images/NFTs/NYM-face-down-SMALL.png" alt="" draggable="false"></span>
             <span class="mystery-card__side mystery-card__front"><img class="mystery-card__art" src="./assets/images/NFTs/NFT-05.png" alt="NOT YOUR MONEY NFT collectible" draggable="false"></span>
           </span>
-          <span class="mystery-card__caption">MYSTERY CARD <i>05</i></span>
-        </button>
-        <button class="mystery-card" type="button" aria-label="Mystery NFT card 6. Hover to reveal." aria-pressed="false">
+          <span class="card-caption">MYSTERY CARD <i>05</i></span>
+        </button>\n<button class="mystery-card" type="button" aria-label="Mystery NFT card 6. Hover or tap to reveal." aria-pressed="false">
           <span class="mystery-card__flip">
             <span class="mystery-card__side mystery-card__back"><img src="./assets/images/NFTs/NYM-face-down-SMALL.png" alt="" draggable="false"></span>
             <span class="mystery-card__side mystery-card__front"><img class="mystery-card__art" src="./assets/images/NFTs/NFT-06.png" alt="NOT YOUR MONEY NFT collectible" draggable="false"></span>
           </span>
-          <span class="mystery-card__caption">MYSTERY CARD <i>06</i></span>
+          <span class="card-caption">MYSTERY CARD <i>06</i></span>
         </button>
       </div>
-      <section class="nft-utility" id="nft-utility" aria-labelledby="nft-utility-title">
-        <div class="nft-utility-intro">
-          <p class="nft-section-label">MORE THAN A COLLECTIBLE</p>
-          <h2 id="nft-utility-title">Your NFT is your <em>key.</em></h2>
-          <p>Collect a NOT YOUR MONEY NFT and step inside the BANK OF SPANKY ecosystem. The vault is just the beginning.</p>
-        </div>
-        <div class="nft-utility-grid">
-          <article class="nft-utility-card">
-            <span class="nft-utility-number">01</span>
-            <span class="nft-utility-icon" aria-hidden="true">⌘</span>
-            <h3>Private Discord Access</h3>
-            <p>Get access to the holders' room: exclusive community channels, announcements, and a front-row seat as the bank evolves.</p>
-          </article>
-          <article class="nft-utility-card">
-            <span class="nft-utility-number">02</span>
-            <span class="nft-utility-icon" aria-hidden="true">✦</span>
-            <h3>Exclusive Courses</h3>
-            <p>Unlock members-only learning content and educational drops, made available to NFT holders at no extra cost.</p>
-          </article>
-          <article class="nft-utility-card">
-            <span class="nft-utility-number">03</span>
-            <span class="nft-utility-icon" aria-hidden="true">♛</span>
-            <h3>Merch Airdrops</h3>
-            <p>Get in line for exclusive merch drops, holder-only designs, and special rewards from the BANK OF SPANKY collection.</p>
-          </article>
-          <article class="nft-utility-card">
-            <span class="nft-utility-number">04</span>
-            <span class="nft-utility-icon" aria-hidden="true">$</span>
-            <h3>Cash Rewards</h3>
-            <p>Be eligible for planned community reward campaigns and special cash-prize events, subject to their published rules.</p>
-          </article>
-          <article class="nft-utility-card">
-            <span class="nft-utility-number">05</span>
-            <span class="nft-utility-icon" aria-hidden="true">◈</span>
-            <h3>DEADS Token Utility</h3>
-            <p>Explore future DEADS holder benefits, ecosystem access, and potential advantages connected to the BANK OF SPANKY world.</p>
-          </article>
-          <article class="nft-utility-card">
-            <span class="nft-utility-number">06</span>
-            <span class="nft-utility-icon" aria-hidden="true">↗</span>
-            <h3>SPANKY Ecosystem Perks</h3>
-            <p>Future plans include holder-focused opportunities around SPANKY trading activity, new products, and whatever we build next.</p>
-          </article>
-        </div>
-        <p class="nft-utility-footnote">Utility is being developed and may roll out in stages. Specific benefits, eligibility, timing, and reward terms will be announced officially. Token-related features and rewards are not guaranteed and should not be viewed as a promise of profit or investment return.</p>
-      </section>
-      <p class="nft-interaction-note"><span class="desktop-note">MOVE YOUR CURSOR OVER A CARD TO REVEAL</span><span class="mobile-note">TAP A CARD TO REVEAL</span><i>✦</i></p>
+      <p class="interaction-note"><span class="desktop-note">MOVE YOUR CURSOR OVER A CARD TO REVEAL</span><span class="mobile-note">TAP A CARD TO REVEAL</span><b>✦</b></p>
     </section>
 
-    <section class="nft-mint">
-      <p class="nft-section-label">YOUR SEAT IS WAITING</p>
+    <section class="utility-section">
+      <div class="section-wrap">
+        <div class="section-heading utility-heading">
+          <p class="section-label">MORE THAN A COLLECTIBLE</p>
+          <h2>Your NFT is your <em>key.</em></h2>
+          <p>Collect a NOT YOUR MONEY NFT and step inside the BANK OF SPANKY ecosystem. The vault is just the beginning.</p>
+        </div>
+        <div class="utility-grid">
+          <article class="utility-card"><span class="utility-no">01</span><span class="utility-icon">⌘</span><h3>Private Discord Access</h3><p>Enter the holders' room for exclusive community channels, announcements, and a front-row seat as the bank evolves.</p></article>
+          <article class="utility-card"><span class="utility-no">02</span><span class="utility-icon">✦</span><h3>Exclusive Courses</h3><p>Unlock members-only learning content and educational drops, made available to NFT holders at no extra cost.</p></article>
+          <article class="utility-card"><span class="utility-no">03</span><span class="utility-icon">♛</span><h3>Merch Airdrops</h3><p>Get access to planned exclusive merch drops, holder-only designs, and special rewards from the BANK OF SPANKY collection.</p></article>
+          <article class="utility-card"><span class="utility-no">04</span><span class="utility-icon">$</span><h3>Cash Rewards</h3><p>Be eligible for planned community reward campaigns and special cash-prize events, subject to their published rules.</p></article>
+          <article class="utility-card"><span class="utility-no">05</span><span class="utility-icon">◈</span><h3>DEADS Token Utility</h3><p>Explore future DEADS holder benefits, ecosystem access, and potential advantages connected to the BANK OF SPANKY world.</p></article>
+          <article class="utility-card"><span class="utility-no">06</span><span class="utility-icon">↗</span><h3>SPANKY Ecosystem Perks</h3><p>Future plans include holder-focused opportunities around SPANKY trading activity, new products, and everything we build next.</p></article>
+        </div>
+        <p class="utility-disclaimer">Utility is in development and may roll out in stages. Specific benefits, eligibility, timing, and reward terms will be announced officially. Token-related features and rewards are not guaranteed and are not a promise of profit or investment return.</p>
+      </div>
+    </section>
+
+    <section class="mint-section">
+      <p class="section-label">YOUR SEAT IS WAITING</p>
       <h2>Get in.<br><em>Stay legendary.</em></h2>
       <p>Claim your NOT YOUR MONEY collectible through the official mint.</p>
-      <a class="nft-mint-button" href="https://gravemint.io/mint/2nw995" target="_blank" rel="noopener noreferrer">ENTER THE MINT <span>↗</span></a>
+      <a class="mint-button" href="https://gravemint.io/mint/2nw995" target="_blank" rel="noopener noreferrer">ENTER THE MINT <span>↗</span></a>
       <small>Minting takes place on Gravemint. Check the mint page for current availability, network and transaction costs.</small>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="nft-footer">
     <a class="footer-brand" href="./index.html#top">BANK OF <b>SPANKY</b></a>
     <span>© <span id="year"></span> BANK OF SPANKY. ALL NONSENSE RESERVED.</span>
     <a href="#top">BACK TO TOP ↑</a>
