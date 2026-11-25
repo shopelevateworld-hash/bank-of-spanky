@@ -3,6 +3,10 @@
   "name": "bank-of-spanky",
   "main": "src/index.js",
   "compatibility_date": "2026-11-22",
+  "keep_vars": true,
+  "secrets": {
+    "required": ["PRINTFUL_API_KEY"]
+  },
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
