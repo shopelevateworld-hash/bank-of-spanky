@@ -46,8 +46,17 @@
 .nft-mint-button:hover{transform:translateY(-3px);filter:brightness(1.1)}
 .nft-mint small{display:block;max-width:490px;margin:20px auto 0;color:#807665;font-size:9px;line-height:1.8}
 @media(max-width:900px){
-  .mystery-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-  .mystery-card{max-width:220px;justify-self:center}
+  .mystery-grid{
+    grid-template-columns:repeat(6,minmax(145px,1fr));
+    gap:14px;
+    overflow-x:auto;
+    overflow-y:visible;
+    padding:12px 3px 18px;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:thin;
+    scrollbar-color:#9d7940 #17120b;
+  }
+  .mystery-card{scroll-snap-align:start}
 }
 @media(max-width:680px){
   .nft-hero{padding:50px 5vw 25px}
@@ -58,7 +67,7 @@
   .nft-hero-rule{margin-top:35px;font-size:6px;letter-spacing:.1em}
   .nft-gallery{padding:65px 6vw 78px}
   .nft-gallery-heading{margin-bottom:30px}
-  .mystery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 15px}
+  .mystery-grid{gap:13px}
   .mystery-card{max-width:none}
   .desktop-note{display:none}
   .mobile-note{display:inline}
