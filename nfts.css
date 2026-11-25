@@ -16,7 +16,7 @@ button{font:inherit}
 .nav a:hover,.nav a.active{color:#f0d9a8}
 .nav .nav-mint{padding:12px 15px;border:1px solid rgba(226,197,141,.55);color:#f0d9a8}
 .menu-toggle{display:none}
-.nft-hero{padding:clamp(65px,9vw,112px) 5vw 32px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(176,127,52,.15),transparent 48%)}
+.nft-hero{position:relative;isolation:isolate;overflow:hidden;padding:clamp(105px,13vw,165px) 5vw 38px;text-align:center;background-image:linear-gradient(180deg,rgba(8,7,6,.24) 0%,rgba(8,7,6,.42) 42%,#080706 100%),url("./assets/images/BANNER.png");background-size:cover;background-position:center 36%;background-repeat:no-repeat}
 .eyebrow{display:flex;justify-content:center;align-items:center;gap:12px;color:var(--nft-gold);font-size:8px;letter-spacing:.24em}
 .eyebrow span{width:24px;height:1px;background:#c49a52}.eyebrow i{font-style:normal;color:#80663b}
 .edition,.section-label{color:#a98b58;font-size:8px;letter-spacing:.24em}
